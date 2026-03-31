@@ -95,8 +95,30 @@ function scrollToMsg(){
 </script>
 
 </body>
-  <iframe width="0" height="0"
-src="https://www.youtube.com/embed/K3nFy1wz6V0?autoplay=1&loop=1&playlist=K3nFy1wz6V0"
-frameborder="0" allow="autoplay">
-</iframe>
+  <body>
+
+<!-- Your other sections above -->
+
+<img id="slideshow" src="IMG-20241101-WA0077.jpg"
+style="width:260px; border-radius:20px; margin-top:20px;">
+
+<script>
+let images = [
+  "IMG-20241101-WA0077.jpg",
+  "IMG-20240517-WA0058.jpg",
+  "Snapchat-1795038573.jpg",
+  "IMG_20240501_180432_208.jpg",
+  "IMG_20240416_190331_448.webp"
+];
+
+let i = 0;
+
+setInterval(() => {
+  i = (i + 1) % images.length;
+  document.getElementById("slideshow").src = images[i];
+}, 2000);
+</script>
+
+</body>
 </html>
+
