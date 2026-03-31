@@ -8,12 +8,13 @@
 body {
   margin:0;
   font-family: 'Segoe UI', sans-serif;
-  background: black;
-  color: white;
+  background:black;
+  color:white;
   text-align:center;
   overflow-x:hidden;
 }
 
+/* sections */
 .section {
   height:100vh;
   display:flex;
@@ -32,9 +33,17 @@ body {
 
 h1 {
   color:#ff4d6d;
-  font-size:40px;
 }
 
+/* slideshow */
+img {
+  width:260px;
+  border-radius:20px;
+  margin-top:20px;
+  box-shadow:0 0 20px pink;
+}
+
+/* button */
 button {
   padding:12px 25px;
   background:#ff4d6d;
@@ -42,11 +51,34 @@ button {
   border-radius:10px;
   color:white;
   font-size:18px;
+  cursor:pointer;
+}
+
+/* floating hearts */
+.hearts {
+  position:fixed;
+  width:100%;
+  top:0;
+  left:0;
+  pointer-events:none;
+}
+
+.heart {
+  position:absolute;
+  color:red;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float {
+  from {transform:translateY(100vh);}
+  to {transform:translateY(-10vh);}
 }
 </style>
 </head>
 
 <body>
+
+<div class="hearts" id="hearts"></div>
 
 <div class="section">
   <h1>🎬 Our Story Begins</h1>
@@ -54,30 +86,38 @@ button {
 </div>
 
 <div class="section">
-  <h1>💞 Our Journey</h1>
-  <p>Every moment with you became my favorite memory 💕</p>
+  <h1>💞 Our Memories</h1>
+
+  <img id="slideshow" src="IMG-20241101-WA0077.jpg">
+
 </div>
 
 <div class="section">
-  <h1>💖 You & Me</h1>
-  <p>You are my happiness, my strength, my everything 💗</p>
+  <h1>💖 I Feel Lucky</h1>
+  <p>
+  Kandu… 🥹<br><br>
+  I feel so lucky to have you in my life 💕<br>
+  Out of everyone, I got you ❤️<br>
+  And that means everything to me 💖
+  </p>
 </div>
 
 <div class="section">
   <h1>🎉 Happy Birthday Kandu ❤️</h1>
-  <button onclick="scrollToMsg()">Click for Surprise 🎁</button>
+  <button onclick="showMessage()">Click for Surprise 🎁</button>
 </div>
 
-<div class="section" id="msg">
+<div class="section" id="final">
   <h1>💌 My Heart</h1>
-  <p>
+  <p id="msg" style="display:none;">
     No matter what happens in life,<br>
-    I will always stand with you ❤️<br>
-    I love you forever 💕
+    I will always stand beside you ❤️<br><br>
+    I love you forever Kandu 💕
   </p>
 </div>
 
 <script>
+/* scroll animation */
 const sections = document.querySelectorAll(".section");
 
 window.addEventListener("scroll", () => {
@@ -89,20 +129,7 @@ window.addEventListener("scroll", () => {
   });
 });
 
-function scrollToMsg(){
-  document.getElementById("msg").scrollIntoView({behavior:"smooth"});
-}
-</script>
-
-</body>
-  <body>
-
-<!-- Your other sections above -->
-
-<img id="slideshow" src="IMG-20241101-WA0077.jpg"
-style="width:260px; border-radius:20px; margin-top:20px;">
-
-<script>
+/* slideshow */
 let images = [
   "IMG-20241101-WA0077.jpg",
   "IMG-20240517-WA0058.jpg",
@@ -117,8 +144,30 @@ setInterval(() => {
   i = (i + 1) % images.length;
   document.getElementById("slideshow").src = images[i];
 }, 2000);
+
+/* surprise */
+function showMessage(){
+  document.getElementById("msg").style.display = "block";
+  document.getElementById("final").scrollIntoView({behavior:"smooth"});
+}
+
+/* floating hearts */
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random()*20 + 20 + "px";
+
+  document.getElementById("hearts").appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+
+setInterval(createHeart, 500);
 </script>
 
 </body>
 </html>
-
