@@ -8,7 +8,7 @@
 body {
   margin:0;
   font-family:'Segoe UI',sans-serif;
-  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  background: linear-gradient(135deg, #ff9a9e, #fecfef, #fad0c4);
   color:#5a0f2e;
   text-align:center;
   overflow-x:hidden;
@@ -33,7 +33,7 @@ body {
 
 h1 {
   color:#ff4d6d;
-  text-shadow:0 0 10px pink;
+  text-shadow:0 0 15px pink;
 }
 
 /* slideshow */
@@ -41,7 +41,7 @@ img {
   width:260px;
   border-radius:20px;
   margin-top:20px;
-  box-shadow:0 0 20px pink;
+  box-shadow:0 0 25px pink;
 }
 
 /* button */
@@ -49,40 +49,41 @@ button {
   padding:12px 25px;
   background:#ff4d6d;
   border:none;
-  border-radius:10px;
+  border-radius:20px;
   color:white;
   font-size:18px;
+  cursor:pointer;
+  margin-top:15px;
 }
 
-/* floating hearts */
-.heart {
+/* floating hearts & kisses */
+.floating {
   position:fixed;
   bottom:-10px;
-  color:red;
-  animation:float 6s linear infinite;
+  animation:floatUp 6s linear infinite;
 }
 
-@keyframes float {
+@keyframes floatUp {
   from {transform:translateY(0);}
   to {transform:translateY(-100vh);}
 }
 
-/* infinite love text */
+/* infinite text */
 #infinite {
   font-size:22px;
   margin-top:20px;
   white-space:nowrap;
-  overflow:hidden;
 }
 </style>
 </head>
 
 <body>
 
-<!-- sections -->
 <div class="section">
   <h1>🎬 Our Story Begins</h1>
   <p>The day I met you… my life changed forever ❤️</p>
+
+  <button onclick="playSong()">🎵 Play Our Song</button>
 </div>
 
 <div class="section">
@@ -94,43 +95,40 @@ button {
   <h1>💖 I Feel So Lucky</h1>
   <p>
   Kandu… 🥹<br><br>
-  Out of everyone in this world… I got you ❤️<br>
-  And I still wonder how I got so lucky 💕<br><br>
-  You are my happiness, my strength, my peace 💖<br>
-  Life feels so beautiful because you are in it ✨
+  I feel so lucky every single day to have you 💕<br>
+  Out of everyone in this world… I got you ❤️<br><br>
+  You are my happiness, my strength, my everything 💖
   </p>
 </div>
 
 <div class="section">
-  <h1>💌 My Love For You</h1>
+  <h1>💌 My Love</h1>
   <p>
   I love you more than anyone in this world ❤️<br><br>
-  You are not just my love…<br>
-  You are my home 🏡<br><br>
+  You are my home, my peace, my forever 💕<br><br>
   No matter what happens in life,<br>
-  I will always stand beside you 💕<br><br>
-  I will always choose you… again and again ❤️
+  I will always stand beside you 💖
   </p>
 </div>
 
 <div class="section">
   <h1>🎉 Happy Birthday Kandu ❤️</h1>
   <p>
-  May your life be filled with happiness,<br>
-  success, love and everything you deserve 💖<br><br>
-  And I promise… I’ll always be there with you 🥹
+  I wish you endless happiness,<br>
+  success, love and everything beautiful 💖<br><br>
+  And I promise… I’ll always be with you 🥹
   </p>
 </div>
 
 <div class="section">
   <h1>💞 Forever & Always</h1>
   <div id="infinite"></div>
+  <p>Forever yours… ❤️</p>
 </div>
 
 <script>
 /* scroll animation */
 const sections = document.querySelectorAll(".section");
-
 window.addEventListener("scroll", () => {
   sections.forEach(sec => {
     const top = sec.getBoundingClientRect().top;
@@ -150,24 +148,32 @@ let images = [
 ];
 
 let i = 0;
-
 setInterval(() => {
   i = (i + 1) % images.length;
   document.getElementById("slideshow").src = images[i];
 }, 2000);
 
-/* floating hearts */
-function createHeart(){
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random()*100 + "vw";
-  heart.style.fontSize = Math.random()*20 + 20 + "px";
-  document.body.appendChild(heart);
-
-  setTimeout(()=>{heart.remove();},6000);
+/* song button */
+function playSong(){
+  window.open("https://youtu.be/K3nFy1wz6V0", "_blank");
 }
-setInterval(createHeart,400);
+
+/* floating hearts & kisses */
+function createFloating(){
+  const el = document.createElement("div");
+  el.classList.add("floating");
+
+  const emojis = ["❤️","💋","💕","💖"];
+  el.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+
+  el.style.left = Math.random()*100 + "vw";
+  el.style.fontSize = Math.random()*20 + 20 + "px";
+
+  document.body.appendChild(el);
+
+  setTimeout(()=>{el.remove();},6000);
+}
+setInterval(createFloating,400);
 
 /* infinite love */
 let text = "I love you Kandu ❤️ ";
