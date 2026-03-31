@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,9 +7,9 @@
 <style>
 body {
   margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background:black;
-  color:white;
+  font-family:'Segoe UI',sans-serif;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  color:#5a0f2e;
   text-align:center;
   overflow-x:hidden;
 }
@@ -33,6 +33,7 @@ body {
 
 h1 {
   color:#ff4d6d;
+  text-shadow:0 0 10px pink;
 }
 
 /* slideshow */
@@ -51,69 +52,79 @@ button {
   border-radius:10px;
   color:white;
   font-size:18px;
-  cursor:pointer;
 }
 
 /* floating hearts */
-.hearts {
-  position:fixed;
-  width:100%;
-  top:0;
-  left:0;
-  pointer-events:none;
-}
-
 .heart {
-  position:absolute;
+  position:fixed;
+  bottom:-10px;
   color:red;
   animation:float 6s linear infinite;
 }
 
 @keyframes float {
-  from {transform:translateY(100vh);}
-  to {transform:translateY(-10vh);}
+  from {transform:translateY(0);}
+  to {transform:translateY(-100vh);}
+}
+
+/* infinite love text */
+#infinite {
+  font-size:22px;
+  margin-top:20px;
+  white-space:nowrap;
+  overflow:hidden;
 }
 </style>
 </head>
 
 <body>
 
-<div class="hearts" id="hearts"></div>
-
+<!-- sections -->
 <div class="section">
   <h1>🎬 Our Story Begins</h1>
-  <p>The day I met you changed my life ❤️</p>
+  <p>The day I met you… my life changed forever ❤️</p>
 </div>
 
 <div class="section">
   <h1>💞 Our Memories</h1>
-
   <img id="slideshow" src="IMG-20241101-WA0077.jpg">
-
 </div>
 
 <div class="section">
-  <h1>💖 I Feel Lucky</h1>
+  <h1>💖 I Feel So Lucky</h1>
   <p>
   Kandu… 🥹<br><br>
-  I feel so lucky to have you in my life 💕<br>
-  Out of everyone, I got you ❤️<br>
-  And that means everything to me 💖
+  Out of everyone in this world… I got you ❤️<br>
+  And I still wonder how I got so lucky 💕<br><br>
+  You are my happiness, my strength, my peace 💖<br>
+  Life feels so beautiful because you are in it ✨
+  </p>
+</div>
+
+<div class="section">
+  <h1>💌 My Love For You</h1>
+  <p>
+  I love you more than anyone in this world ❤️<br><br>
+  You are not just my love…<br>
+  You are my home 🏡<br><br>
+  No matter what happens in life,<br>
+  I will always stand beside you 💕<br><br>
+  I will always choose you… again and again ❤️
   </p>
 </div>
 
 <div class="section">
   <h1>🎉 Happy Birthday Kandu ❤️</h1>
-  <button onclick="showMessage()">Click for Surprise 🎁</button>
+  <p>
+  May your life be filled with happiness,<br>
+  success, love and everything you deserve 💖<br><br>
+  And I promise… I’ll always be there with you 🥹
+  </p>
 </div>
 
-<div class="section" id="final">
-  <h1>💌 My Heart</h1>
-  <p id="msg" style="display:none;">
-    No matter what happens in life,<br>
-    I will always stand beside you ❤️<br><br>
-    I love you forever Kandu 💕
-  </p>
+<div class="section">
+  <h1>💞 Forever & Always</h1>
+  <div id="infinite"></div>
 </div>
 
 <script>
@@ -145,28 +156,26 @@ setInterval(() => {
   document.getElementById("slideshow").src = images[i];
 }, 2000);
 
-/* surprise */
-function showMessage(){
-  document.getElementById("msg").style.display = "block";
-  document.getElementById("final").scrollIntoView({behavior:"smooth"});
-}
-
 /* floating hearts */
 function createHeart(){
   const heart = document.createElement("div");
   heart.classList.add("heart");
   heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.left = Math.random()*100 + "vw";
   heart.style.fontSize = Math.random()*20 + 20 + "px";
+  document.body.appendChild(heart);
 
-  document.getElementById("hearts").appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 6000);
+  setTimeout(()=>{heart.remove();},6000);
 }
+setInterval(createHeart,400);
 
-setInterval(createHeart, 500);
+/* infinite love */
+let text = "I love you Kandu ❤️ ";
+let infinite = document.getElementById("infinite");
+
+setInterval(()=>{
+  infinite.innerHTML += text;
+},300);
 </script>
 
 </body>
