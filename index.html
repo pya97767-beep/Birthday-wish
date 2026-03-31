@@ -1,31 +1,96 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Happy Birthday Kandu ❤️</title>
+
+<style>
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: black;
+  color: white;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+.section {
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  transform:translateY(50px);
+  transition:1s;
+}
+
+.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+h1 {
+  color:#ff4d6d;
+  font-size:40px;
+}
+
+button {
+  padding:12px 25px;
+  background:#ff4d6d;
+  border:none;
+  border-radius:10px;
+  color:white;
+  font-size:18px;
+}
+</style>
 </head>
 
-<body style="background:black; color:white; text-align:center; font-family:sans-serif;">
+<body>
 
-<h1>🎉 Happy Birthday Kandu ❤️</h1>
+<div class="section">
+  <h1>🎬 Our Story Begins</h1>
+  <p>The day I met you changed my life ❤️</p>
+</div>
 
-<p>
-You are my everything 💕<br>
-My happiness, my strength, my love 💖
-</p>
+<div class="section">
+  <h1>💞 Our Journey</h1>
+  <p>Every moment with you became my favorite memory 💕</p>
+</div>
 
-<button onclick="showMessage()">Click for Surprise 🎁</button>
+<div class="section">
+  <h1>💖 You & Me</h1>
+  <p>You are my happiness, my strength, my everything 💗</p>
+</div>
 
-<p id="msg" style="display:none; margin-top:20px;">
-💌 Kandu...  
-No matter what happens in life,  
-I will always be with you ❤️  
-I love you forever 💕
-</p>
+<div class="section">
+  <h1>🎉 Happy Birthday Kandu ❤️</h1>
+  <button onclick="scrollToMsg()">Click for Surprise 🎁</button>
+</div>
+
+<div class="section" id="msg">
+  <h1>💌 My Heart</h1>
+  <p>
+    No matter what happens in life,<br>
+    I will always stand with you ❤️<br>
+    I love you forever 💕
+  </p>
+</div>
 
 <script>
-function showMessage() {
-  document.getElementById("msg").style.display = "block";
+const sections = document.querySelectorAll(".section");
+
+window.addEventListener("scroll", () => {
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      sec.classList.add("show");
+    }
+  });
+});
+
+function scrollToMsg(){
+  document.getElementById("msg").scrollIntoView({behavior:"smooth"});
 }
 </script>
 
